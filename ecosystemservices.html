@@ -51,7 +51,7 @@
                 var selectedItem = chart.getSelection()[0];
                 if (selectedItem) {
                     var topping = data.getValue(selectedItem.row, 0);
-                    alert('The user selected ' + topping);
+                
                 }
             }
             google.visualization.events.addListener(chart, 'select', selectHandler);
