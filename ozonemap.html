@@ -1,0 +1,82 @@
+<html>
+
+<head>
+    <title>Heatmap Test</title>
+    <style type="text/css">
+        html {
+            height: 100%
+        }
+
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0
+        }
+
+        #map_canvas {
+            height: 100%
+        }
+    </style>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://www.google.com/jsapi"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8nkbOFCIJoVstI7A4irmXFv57zj1K080&callback=initMap&libraries=visualization&v=weekly"
+        defer></script>
+    <script type="text/javascript">
+
+        $.ajaxPrefilter("json script", function (options) {
+            options.crossDomain = true;
+        });
+
+        function initialize() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const lat = parseFloat(urlParams.get('lat'));
+            const long = parseFloat(urlParams.get('long'));
+            var mapOptions = {
+                center: new google.maps.LatLng(lat, long),
+                zoom: 5,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var infoWindow = new google.maps.InfoWindow();
+            var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+            var layoffLocs = new Array();
+            $.getJSON('https://environmentindicator.blob.core.windows.net/data/ozone.json', function (data) {
+                $.each(data, function (i, value) {
+                    layoffLocs.push(new google.maps.LatLng(value.lat, value.long));
+                    const latLng = new google.maps.LatLng(value.lat, value.long);
+
+                 /*   const marker = new google.maps.Marker({
+                        position: latLng,
+                        map: map,
+                    });
+                    google.maps.event.addListener(marker, 'click', function () {
+                        alert("test");
+                    });*/
+
+                });
+
+                var pointArray = new google.maps.MVCArray(layoffLocs);
+                var heatmap = new google.maps.visualization.HeatmapLayer({
+                    data: pointArray
+                });
+
+
+                google.load('visualization', '1.0', {
+                    'packages': ['corechart', 'bar']
+                });
+
+
+                heatmap.setMap(map);
+            });
+            // google.maps.event.addDomListener(window, 'load', initialize);
+        }
+
+    </script>
+</head>
+
+<body onload="initialize()">
+    <div id="map_canvas"></div>
+</body>
+
+</html>

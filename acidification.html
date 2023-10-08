@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<!--
+ @license
+ Copyright 2019 Google LLC. All Rights Reserved.
+ SPDX-License-Identifier: Apache-2.0
+-->
+<html>
+
+<head>
+    <title>Default Data Layer: Earthquakes</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://www.google.com/jsapi"></script>
+    <script>
+        /**
+         * @license
+         * Copyright 2019 Google LLC. All Rights Reserved.
+         * SPDX-License-Identifier: Apache-2.0
+         */
+        var contentString = '';
+        var contentString1 = '';
+        var contentString2 = '';
+        var contentString3 = '';
+
+        let map;
+        function drawChart(marker, arr) {
+
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Topping');
+            data.addColumn('number', 'Slices');
+            data.addRows([
+                ['Environmental Health', arr.EnvironmentalHealth],
+                ['Ecosystem Vitality', arr.EcosystemVitality],
+                ['Climate Change', arr.ClimateChange]
+            ]);
+            var options = {
+                'title': 'Environment Performance Index for ' + arr.country, //+// marker.getPosition().toString(),
+                'height': 200,
+                'width': 335,
+                is3D: true,
+                colors: ['#FF6961', '#77DD77', '#6CA0DC'],
+            };
+            var mainNode = document.createElement('div');
+            var infoWindowNode = document.createElement('table');
+            infoWindowNode.setAttribute("id", "myTable");
+            document.body.appendChild(infoWindowNode);
+            var tr = document.createElement('tr');
+            document.getElementById("myTable").appendChild(tr);
+            var td = document.createElement('td');
+            var node = document.createElement('div');
+            var textNode = document.createElement('div');
+            //textNode.innerHTML = contentString;
+            infoWindowNode.appendChild(textNode);
+            infoWindowNode.appendChild(node);
+            td.appendChild(node);
+            td.appendChild(textNode);
+            infoWindowNode.appendChild(td);
+            var infoWindow = new google.maps.InfoWindow();
+            var chart = new google.visualization.PieChart(node);
+            function selectHandler() {
+                var selectedItem = chart.getSelection()[0];
+                if (selectedItem) {
+                    var topping = data.getValue(selectedItem.row, 0);
+                    alert('The user selected ' + topping);
+                }
+            }
+            google.visualization.events.addListener(chart, 'select', selectHandler);
+            chart.draw(data, options);
+
+
+            var options1 = {
+                'title': 'Ecosystem Vitality', //+// marker.getPosition().toString(),
+                'height': 200,
+                'width': 335,
+                is3D: true,
+                colors: ['#F66D44', '#FEAE65', '#E6F69D', '#AADEA7', '#64C2A6', '#2D87BB'],
+            };
+            var data1 = new google.visualization.DataTable();
+            data1.addColumn('string', 'Topping');
+            data1.addColumn('number', 'Slices');
+            data1.addRows([
+                ['Biodiversity & Habitat', arr.BiodiversityHabitat],
+                ['Ecosystem Services', arr.EcosystemServices],
+                ['Fisheries', arr.Fisheries],
+                ['Acidification', arr.Acidification],
+                ['Agriculture', arr.Agriculture],
+                ['WaterResources', arr.WaterResources],
+            ]);
+            var node1 = document.createElement('div');
+            var textNode1 = document.createElement('div');
+            //textNode1.innerHTML = contentString1;
+            infoWindowNode.appendChild(textNode1);
+            infoWindowNode.appendChild(node1);
+            var chart1 = new google.visualization.PieChart(node1);
+            chart1.draw(data1, options1);
+
+
+            var option2 = {
+                'title': 'Environment Health', //+// marker.getPosition().toString(),
+                'height': 200,
+                'width': 335,
+                is3D: true,
+                colors: ['#E6F69D', '#AADEA7', '#64C2A6', '#2D87BB'],
+            };
+            var data2 = new google.visualization.DataTable();
+            data2.addColumn('string', 'Topping');
+            data2.addColumn('number', 'Slices');
+            data2.addRows([
+                ['Air Quality', arr.AirQuality],
+                ['Sanitation & Drinking Water', arr.SanitationDrinkingWater],
+                ['Heavy Metals', arr.HeavyMetals],
+                ['Waste Management', arr.WasteManagement]
+            ]);
+            var tr2 = document.createElement('tr');
+            document.getElementById("myTable").appendChild(tr2);
+            var td2 = document.createElement('td');
+            var node2 = document.createElement('div');
+            var textNode2 = document.createElement('div');
+            //textNode2.innerHTML = contentString2;
+            infoWindowNode.appendChild(textNode2);
+            infoWindowNode.appendChild(node2);
+            td2.appendChild(node2);
+            td2.appendChild(textNode2);
+            infoWindowNode.appendChild(td2);
+            var chart2 = new google.visualization.PieChart(node2);
+            function selectHandler2() {
+                var selectedItem2 = chart2.getSelection()[0];
+                if (selectedItem2) {
+                    var topping2 = data.getValue(selectedItem2.row, 0);
+                    alert('The user selected ' + topping2);
+                }
+            }
+            google.visualization.events.addListener(chart, 'select', selectHandler2);
+            chart2.draw(data2, option2);
+
+
+            /* var options3 = {
+               'title': 'Climate Change', //+// marker.getPosition().toString(),
+               'height': 200,
+               'width': 320,
+               is3D: true,
+       
+               colors: ['orange', 'green', 'blue', 'red', 'yellow', 'grey'],
+             };
+             var data3 = new google.visualization.DataTable();
+             data3.addColumn('string', 'Topping');
+             data3.addColumn('number', 'Slices');
+             data3.addRows([
+               ['Climate Change', arr.ClimateChange]
+             ]);*/
+            var node3 = document.createElement('div');
+            var textNode3 = document.createElement('div');
+            //textNode3.innerHTML = contentString3;
+            infoWindowNode.appendChild(textNode3);
+            infoWindowNode.appendChild(node3);
+            //var chart3 = new google.visualization.PieChart(node3);
+            //chart3.draw(data3, options3);
+            alert("arr.ClimateChangeNewRank" + arr.ClimateChangeNewRank);
+            var data3 = google.visualization.arrayToDataTable([
+                ['Year', 'Ranking'],
+                ['2021', arr.ClimateChangeOldRank],
+                ['2022', arr.ClimateChangeNewRank]
+            ]);
+
+            var options3 = {
+                chart: {
+                    title: 'Climate Change Ranking',
+                    subtitle: '',
+                },
+                titleTextStyle: {
+                    fontSize: 9, // 12, 18 whatever you want (don't specify px)
+                    bold: true,
+                }
+            };
+
+            var chart3 = new google.charts.Bar(node3);
+
+            chart3.draw(data3, google.charts.Bar.convertOptions(options3));
+            mainNode.appendChild(infoWindowNode);
+            infoWindow.setContent(mainNode);
+            infoWindow.open(marker.getMap(), marker);
+            setTimeout(() => {
+                document.getElementById('myTable').parentElement.parentElement.style.maxWidth = '100% !important';
+            }, 100);
+
+        }
+
+
+
+
+        function initMap() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const lat = parseFloat(urlParams.get('lat'));
+            const long = parseFloat(urlParams.get('long'));
+            
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: { lat: lat, lng: long },
+                zoom: 5,
+            });
+
+            infoWindow = new google.maps.InfoWindow({
+                content: ""
+            });
+
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function () {
+                console.log(this.responseText);
+                const myArr = JSON.parse(this.responseText);
+                for (let i = 0; i < myArr.length; i++) {
+                    console.log("test:::" + myArr[i].lat);
+                    console.log("EnvironmentalHealth:::" + myArr[i].EnvironmentalHealth);
+                    const latLng = new google.maps.LatLng(myArr[i].lat, myArr[i].long);
+                    const marker = new google.maps.Marker({
+                        position: latLng,
+                        map: map,
+                    });
+                    google.maps.event.addListener(marker, 'click', function () {
+                        drawChart(this, myArr[i]);
+                    });
+                    google.load('visualization', '1.0', {
+                        'packages': ['corechart', 'bar']
+                    });
+                }
+            }
+            xhttp.open("GET", "https://environmentindicator.blob.core.windows.net/data/epi.json", true);
+            xhttp.send();
+
+        }
+        window.initMap = initMap;
+    </script>
+    <style>
+        /**
+       * @license
+       * Copyright 2019 Google LLC. All Rights Reserved.
+       * SPDX-License-Identifier: Apache-2.0
+       */
+        /* 
+       * Always set the map height explicitly to define the size of the div element
+       * that contains the map. 
+       */
+        #map {
+            height: 100%;
+        }
+
+        /** 
+       * Optional: Makes the sample page fill the window. 
+       */
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-y: hidden;
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        .info-window-content {
+            padding: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8nkbOFCIJoVstI7A4irmXFv57zj1K080&callback=initMap&v=weekly"
+        defer></script>
+</body>
+
+</html>
