@@ -1,9 +1,4 @@
 <!DOCTYPE html>
-<!--
- @license
- Copyright 2019 Google LLC. All Rights Reserved.
- SPDX-License-Identifier: Apache-2.0
--->
 <html>
 
 <head>
@@ -12,11 +7,7 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://www.google.com/jsapi"></script>
     <script>
-        /**
-         * @license
-         * Copyright 2019 Google LLC. All Rights Reserved.
-         * SPDX-License-Identifier: Apache-2.0
-         */
+
         var contentString = '';
         var contentString1 = '';
         var contentString2 = '';
@@ -61,7 +52,7 @@
                 var selectedItem = chart.getSelection()[0];
                 if (selectedItem) {
                     var topping = data.getValue(selectedItem.row, 0);
-                    alert('The user selected ' + topping);
+                   
                 }
             }
             google.visualization.events.addListener(chart, 'select', selectHandler);
@@ -229,15 +220,7 @@
         window.initMap = initMap;
     </script>
     <style>
-        /**
-       * @license
-       * Copyright 2019 Google LLC. All Rights Reserved.
-       * SPDX-License-Identifier: Apache-2.0
-       */
-        /* 
-       * Always set the map height explicitly to define the size of the div element
-       * that contains the map. 
-       */
+      
         #map {
             height: 100%;
         }
@@ -266,7 +249,7 @@
 <body>
     <div id="map"></div>
     <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8nkbOFCIJoVstI7A4irmXFv57zj1K080&callback=initMap&v=weekly"
+        src=""
         defer></script>
 </body>
 
